@@ -29,3 +29,9 @@
 	- If any notes api called without header, it should return **Not authenticated** message. 
 	- Error handling should be done properly in whole application. If any error occurs in Generate and verify token methods, then it should send error message only not whole error object. No need to customize any error message just send as it is.
 	- Seed code can be cloned form https://gitlab-cts.stackroute.in/stack_nodejs/nodejs-keep-level-2-assignment.git
+
+## MENTORS TO BEGIN REVIEW YOUR WORK ONLY AFTER 
+
+- You add the respective Mentor as a Reporter/Master into your Assignment Repository
+- You have checked your Assignment on the Automated Evaluation Tool - Hobbes (Check for necessary steps in your Boilerplate - README.md/PROBLEM.md file. ) and got the required score - Check with your mentor about the Score you must achieve before it is accepted for Manual Submission. 
+- Intimate your Mentor on Slack and/or Send an Email to learner.support@stackroute.in - with your Git URL - Once you done working and is ready for final submission.
