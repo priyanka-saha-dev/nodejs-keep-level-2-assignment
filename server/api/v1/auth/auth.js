@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 const { authConfig } = require('../../../config').appConfig;
 
 const signToken = (payload, secret, expireIn, callback) => {
-    console.log('Sign token');
+    //console.log('Sign token');
     jwt.sign(payload, secret, expireIn, callback);
 
     // jwt.sign({ foo: 'bar' }, 'jwttokenbasedauth', function (err, token) {
@@ -18,7 +18,7 @@ const verifyToken = (token, secret, callback) => {
 
 const isUserAuthenticated = (req, res, next) => {
     const header = req.get('Authorization');
-    console.log('header : ', header);
+    //console.log('header : ', header);
     if (!header) {
         res.status(401).json({ 
             isAuthenticated: false ,
@@ -27,7 +27,7 @@ const isUserAuthenticated = (req, res, next) => {
     }
 
     const token = header.replace('Bearer ', '');
-    console.log('token : ' , token);
+    //console.log('token : ' , token);
 
     verifyToken(token, authConfig.jwtSecret, (err, decoded) => {
         if (err) {

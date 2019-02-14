@@ -35,10 +35,10 @@ const login = (info) => {
           userId : doc.userId
         }
 
-        console.log('login with payload' , payload);
+        //console.log('login with payload' , payload);
 
         auth.signToken(payload, authConfig.jwtSecret, authConfig.jwtExpire , (err, token) => {
-          console.log('err', err);
+          //console.log('err', err);
           if(err) {
             reject({
               message: 'Password is incorrect',
