@@ -20,20 +20,14 @@ const isUserAuthenticated = (req, res, next) => {
     const header = req.get('Authorization');
     //console.log('header : ', header);
     if (!header) {
-        res.status(403).json({ 
-            isAuthenticated: false ,
-            message: 'Not authenticated'
-        });
+        res.status(403).send('Not authenticated');
     } else {
         const token = header.replace('Bearer ', '');
         //console.log('token : ' , token);
     
         verifyToken(token, authConfig.jwtSecret, (err, decoded) => {
             if (err) {
-                res.status(403).json({
-                    isAuthenticated: false,
-                    message: 'Not authenticated'
-                });
+                res.status(403).send('Not authenticated');
             } else {
                 req.userId = decoded.userId;
                 next();

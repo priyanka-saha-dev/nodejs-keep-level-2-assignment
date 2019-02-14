@@ -47,6 +47,7 @@ const login = (info) => {
           } else {
             resolve({
               token : token,
+              jwt: token,
               user : payload,
               status : 200
             });
