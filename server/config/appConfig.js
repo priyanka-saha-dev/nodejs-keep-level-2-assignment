@@ -9,10 +9,7 @@ const dbConfig = {
 }
 
 const authConfig = {
-  jwtSecret: 'jwttokenbasedauth',
-  jwtExpire: {
-    expiresIn: '10h'
-  }
+  jwtSecret: 'jwttokenbasedauth'
 }
 
 module.exports = {
