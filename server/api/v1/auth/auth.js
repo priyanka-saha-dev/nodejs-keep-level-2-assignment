@@ -28,7 +28,7 @@ const isUserAuthenticated = (req, res, next) => {
     
         verifyToken(token, authConfig.jwtSecret, (err, decoded) => {
             if (err) {
-                res.status(403).send('invalid token');
+                res.end('invalid token');
             } else {
                 req.userId = decoded.userId;
                 next();
