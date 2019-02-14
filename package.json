@@ -4,6 +4,7 @@
   "description": "NodeJS app for authenticating using JWT Token",
   "main": "index.js",
   "scripts": {
+    "start": "nodemon ./server/bin/www",
     "test": "node_modules/.bin/mocha ./server/test/**/*.js",
     "lint": "node_modules/.bin/eslint './server/**/*.js' --ignore-path .eslintignore"
   },
@@ -14,9 +15,10 @@
   "author": "StackRoute",
   "license": "Apache-2.0",
   "dependencies": {
-    "express": "~4.15.5",
-    "mongoose": "^5.0.10",
     "body-parser": "^1.18.3",
+    "express": "~4.15.5",
+    "jsonwebtoken": "^8.4.0",
+    "mongoose": "^5.0.10",
     "uuid": "^3.3.2"
   },
   "devDependencies": {

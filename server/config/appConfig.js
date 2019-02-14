@@ -7,7 +7,16 @@ const dbConfig = {
   mongoUrl: 'mongodb://localhost:27017/testDB'
   //mongoUrl : 'mongodb://localhost/keep'
 }
+
+const authConfig = {
+  jwtSecret: 'jwttokenbasedauth',
+  jwtExpire: {
+    expiresIn: '10h'
+  }
+}
+
 module.exports = {
   serverConfig,
-  dbConfig
+  dbConfig,
+  authConfig
 }

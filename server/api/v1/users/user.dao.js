@@ -1,5 +1,7 @@
 const User = require('./user.entity');
 const uuidv1 = require('uuid/v1');
+const auth = require('../auth');
+const { authConfig } = require('../../../config').appConfig;
 
 const login = (info) => {
   //console.log('user data for Login: ', info);
@@ -28,15 +30,29 @@ const login = (info) => {
         });
       } else {
 
-        let user = {
+        let payload = {
           userName : doc.username,
           userId : doc.userId
         }
-        resolve({
-          message: 'Login Success.',
-          status: 200,
-          user: user
-        });
+
+        console.log('login with payload' , payload);
+
+        auth.signToken(payload, authConfig.jwtSecret, authConfig.jwtExpire , (err, token) => {
+          console.log('err', err);
+          if(err) {
+            reject({
+              message: 'Password is incorrect',
+              status: 403
+            });
+          } else {
+            resolve({
+              token : token,
+              user : payload,
+              status : 200
+            });
+          }
+        })
+
       }
     });
   });

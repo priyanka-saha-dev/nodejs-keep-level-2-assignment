@@ -10,6 +10,7 @@ const createNote = (userId, note) => {
       id: uuidv1(),
       title: note.title,
       text: note.text,
+      state: note.state,
       userId: userId
     });
 
