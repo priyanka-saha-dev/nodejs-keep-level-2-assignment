@@ -37,7 +37,7 @@ const login = (info) => {
 
         //console.log('login with payload' , payload);
 
-        auth.signToken(payload, authConfig.jwtSecret, { expiresIn: '10h' }, (err, token) => {
+        auth.signToken(payload, authConfig.jwtSecret, '10h', (err, token) => {
           //console.log('err', err);
           if(err) {
             reject({

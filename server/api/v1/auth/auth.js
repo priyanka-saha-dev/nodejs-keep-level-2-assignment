@@ -2,8 +2,9 @@ const jwt = require('jsonwebtoken');
 const { authConfig } = require('../../../config').appConfig;
 
 const signToken = (payload, secret, expireIn, callback) => {
-    // console.log('Sign token', expireIn);
-    jwt.sign(payload, secret, expireIn, callback);
+    // console.log('Sign token');
+    const ex = { expiresIn: expireIn };
+    jwt.sign(payload, secret, ex, callback);
 
     // jwt.sign({ foo: 'bar' }, 'jwttokenbasedauth', function (err, token) {
     //     console.log('err', err);
