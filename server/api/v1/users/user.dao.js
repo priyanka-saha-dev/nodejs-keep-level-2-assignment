@@ -25,7 +25,7 @@ const login = (info) => {
         });
       } else if(doc.password !== info.password) {
         reject({
-          message: 'Password is incorrect',
+          message: 'Passwords is incorrect',
           status: 403
         });
       } else {
@@ -41,7 +41,7 @@ const login = (info) => {
           //console.log('err', err);
           if(err) {
             reject({
-              message: 'Password is incorrect',
+              message: 'Passwords is incorrect',
               status: 403
             });
           } else {
