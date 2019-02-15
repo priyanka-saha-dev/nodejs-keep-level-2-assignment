@@ -22,25 +22,25 @@ const isUserAuthenticated = (req, res, next) => {
     //console.log('header : ', header);
     if (!header) {
         res.status(403).send('Not authenticated');
-    } else {
+    } //else {
         const token = header.replace('Bearer ', '');
         //console.log('token : ' , token);
     
         verifyToken(token, authConfig.jwtSecret, (err, decoded) => {
 
-            //console.log('err:',err);
+            // console.log('err:',err);
             if (err) {
                 if(err.name === 'TokenExpiredError') {
                     res.status(403).send(err.message);
                 } else {
-                    res.status(403).send(err.message);  //'invalid token'
+                    res.status(403).send('invalid token');
                 }
             } else {
                 req.userId = decoded.userId;
                 next();
             }
         })
-    }
+    //}
 };
 
 module.exports = {
