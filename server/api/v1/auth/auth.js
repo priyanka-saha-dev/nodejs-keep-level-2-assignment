@@ -25,18 +25,17 @@ const isUserAuthenticated = (req, res, next) => {
     } else {
         const token = header.replace('Bearer ', '');
         //console.log('token : ' , token);
-    
+
         verifyToken(token, authConfig.jwtSecret, (err, decoded) => {
 
             //console.log('err:',err);
             if (err) {
-                if(err.name === 'TokenExpiredError') {
+                if (err.name === 'TokenExpiredError') {
                     res.status(403).end(err.message);
                 } else {
                     res.status(403).end('invalid token');
                 }
             } else {
-                //req.userId = decoded.userId;
                 next();
             }
         })
