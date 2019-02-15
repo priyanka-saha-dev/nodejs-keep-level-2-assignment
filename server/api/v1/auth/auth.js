@@ -14,13 +14,7 @@ const signToken = (payload, secret, expireIn, callback) => {
 };
 
 const verifyToken = (token, secret, callback) => {
-    jwt.verify(token, secret, (err, decoded) => {
-        if(err) {
-            res.status(403).end('invalid token');
-        } else {
-            callback();
-        }
-    });
+    jwt.verify(token, secret, callback);
 };
 
 const isUserAuthenticated = (req, res, next) => {
@@ -42,7 +36,7 @@ const isUserAuthenticated = (req, res, next) => {
                     res.status(403).end('invalid token');
                 }
             } else {
-                req.userId = decoded.userId;
+                //req.userId = decoded.userId;
                 next();
             }
         })
