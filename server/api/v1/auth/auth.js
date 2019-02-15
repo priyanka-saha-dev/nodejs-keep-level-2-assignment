@@ -14,7 +14,7 @@ const signToken = (payload, secret, expireIn, callback) => {
 };
 
 const verifyToken = (token, secret, callback) => {
-    jwt.verify(token, secret, callback);
+    //jwt.verify(token, secret, callback);
 };
 
 const isUserAuthenticated = (req, res, next) => {
