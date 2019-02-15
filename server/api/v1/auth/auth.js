@@ -19,16 +19,16 @@ const verifyToken = (token, secret, callback) => {
 
 const isUserAuthenticated = (req, res, next) => {
     const header = req.get('Authorization');
-    console.log('header : ', header);
+    //console.log('header : ', header);
     if (!header) {
         res.status(403).send('Not authenticated');
     } else {
         const token = header.replace('Bearer ', '');
-        console.log('token : ' , token);
+        //console.log('token : ' , token);
     
         verifyToken(token, authConfig.jwtSecret, (err, decoded) => {
 
-            console.log('err:',err);
+            //console.log('err:',err);
             if (err) {
                 if(err.name === 'TokenExpiredError') {
                     res.status(403).send(err.message);
