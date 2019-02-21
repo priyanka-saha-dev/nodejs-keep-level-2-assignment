@@ -1,5 +1,5 @@
 const connection = require('./db');
-const auth = require('./api/v1/auth');
+const auth = require('./api/v1/auth/auth');
 
 /* Replace undefined with Require of your Mongoose connection initialization method */
 const initializeMongooseConnection = () => {

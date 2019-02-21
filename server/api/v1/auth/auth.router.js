@@ -14,7 +14,7 @@ router.post('/isAuthenticated', (req, res, next) => {
     });
 
   } catch (err) {
-    console.log(err);
+    // console.log(err);
     res.send({ message: 'Failed to complete request' });
   }
 });
