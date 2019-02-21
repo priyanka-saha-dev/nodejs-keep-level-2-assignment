@@ -1,6 +1,6 @@
 const User = require('./user.entity');
 const uuidv1 = require('uuid/v1');
-const auth = require('../auth');
+const auth = require('../auth/auth');
 const { authConfig } = require('../../../config').appConfig;
 
 const login = (info) => {
