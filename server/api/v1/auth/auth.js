@@ -14,17 +14,17 @@ const signToken = (payload, secret, expireIn, callback) => {
 };
 
 const verifyToken = (token, secret, callback) => {
-    jwt.verify(token, secret, callback);
+    // jwt.verify(token, secret, callback);
 
-    // jwt.verify(token, secret, (error, decoded) => {
-    //     let errMsg;
-    //     if (error && !decoded) {
-    //         errMsg = 'invalid token';
-    //     }
+    jwt.verify(token, secret, (error, decoded) => {
+        let errMsg;
+        if (error && !decoded) {
+            errMsg = 'invalid token';
+        }
 
-    //     callback(errMsg, decoded);
+        callback(errMsg, decoded);
 
-    // });
+    });
 };
 
 const isUserAuthenticated = (req, res, next) => {
