@@ -41,8 +41,8 @@ describe('JWT Token test scenarios', function() {
 
 		verifyJWTToken(jwt, testConfig.JWTsecretkey, (err, decoded) => {
 			// console.log('Decoded value:', decoded);
-			expect(err).to.equal(null);
-			expect(token).to.not.equal(null);
+			expect(err).to.be.undefined;
+			expect(token).to.not.be.undefined;
 			
 			expect(decoded).to.deep.equal(testConfig.JWTPayload);
 		})
