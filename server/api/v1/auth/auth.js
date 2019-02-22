@@ -80,35 +80,40 @@ const isUserAuthenticated = (req, res, next) => {
 const isUserAuthenticatedRouter = (req, res) => {
 
     return new Promise((resolve, reject) => {
-        const header = req.get('Authorization');
 
-        if (!header) {
-            reject({
-                message: 'Not authenticated',
-                status: 403
-            });
-        } else {
-            const token = header.replace('Bearer ', '');
+        resolve({
+            status : 200,
+            message : 'valid'
+        })
+        // const header = req.get('Authorization');
 
-            verifyToken(token, authConfig.jwtSecret, (err, decoded) => {
+        // if (!header) {
+        //     reject({
+        //         message: 'Not authenticated',
+        //         status: 403
+        //     });
+        // } else {
+        //     const token = header.replace('Bearer ', '');
 
-                // console.log('err:',err);
-                if (err) {
+        //     verifyToken(token, authConfig.jwtSecret, (err, decoded) => {
 
-                    reject({
-                        message: 'invalid token',
-                        status: 403
-                    });
+        //         // console.log('err:',err);
+        //         if (err) {
 
-                } else {
+        //             reject({
+        //                 message: 'invalid token',
+        //                 status: 403
+        //             });
 
-                    resolve({
-                        message: 'valid token',
-                        status: 403
-                    });
-                }
-            })
-        }
+        //         } else {
+
+        //             resolve({
+        //                 message: 'valid token',
+        //                 status: 403
+        //             });
+        //         }
+        //     })
+        // }
     });
 
 };
