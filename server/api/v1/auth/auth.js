@@ -16,38 +16,14 @@ const signToken = (payload, secret, expireIn, callback) => {
 const verifyToken = (token, secret, callback) => {
     // jwt.verify(token, secret, callback);
 
-    // jwt.verify(token, secret, (error, decoded) => {
-    //     let errMsg;
-    //     if (error && !decoded) {
-    //         errMsg = 'invalid token';
-    //     }
+    jwt.verify(token, secret, (error, decoded) => {
+        let errMsg;
+        if (error && !decoded) {
+            errMsg = 'invalid token';
+        }
 
-    //     callback(errMsg, decoded);
+        callback(errMsg, decoded);
 
-    // });
-
-    return new Promise((resolve, reject) => {
-
-        jwt.verify(token, secret, (error, decoded) => {
-
-            if (!error && decoded) {
-
-                resolve({
-                    message: 'valid token',
-                    decoded: decoded,
-                    status: 200
-                });
-                
-            } else {
-                //callback(error, decoded);
-                reject({
-                    message: 'invalid token',
-                    status: 403
-                });
-                
-            }
-
-        });
     });
 };
 
@@ -62,17 +38,18 @@ const isUserAuthenticated = (req, res, next) => {
 
         verifyToken(token, authConfig.jwtSecret, (err, decoded) => {
 
-
-
-        }).then((response) => {
-            //res.status(response.status).send(response.message);
-
-            if (response && response.decoded) {
+            // console.log('err:',err);
+            if (err && err.message) {
+                if (err.name === 'TokenExpiredError') {
+                    res.status(403).send(err.message);
+                } else {
+                    res.status(403).send('invalid token');
+                }
+            } else if (err) {
+                res.status(403).send(err);
+            } else if (next) {
                 next();
             }
-
-        }).catch((error) => {
-            res.status(error.status).send(error.message);
         });
     }
 };
@@ -80,40 +57,35 @@ const isUserAuthenticated = (req, res, next) => {
 const isUserAuthenticatedRouter = (req, res) => {
 
     return new Promise((resolve, reject) => {
+        const header = req.get('Authorization');
 
-        resolve({
-            status : 200,
-            message : 'valid'
-        })
-        // const header = req.get('Authorization');
+        if (!header) {
+            reject({
+                message: 'Not authenticated',
+                status: 403
+            });
+        } else {
+            const token = header.replace('Bearer ', '');
+            
+            verifyToken(token, authConfig.jwtSecret, (err, decoded) => {
 
-        // if (!header) {
-        //     reject({
-        //         message: 'Not authenticated',
-        //         status: 403
-        //     });
-        // } else {
-        //     const token = header.replace('Bearer ', '');
+                // console.log('err:',err);
+                if (err) {
 
-        //     verifyToken(token, authConfig.jwtSecret, (err, decoded) => {
+                    reject({
+                        message: 'invalid token',
+                        status: 403
+                    });
 
-        //         // console.log('err:',err);
-        //         if (err) {
-
-        //             reject({
-        //                 message: 'invalid token',
-        //                 status: 403
-        //             });
-
-        //         } else {
-
-        //             resolve({
-        //                 message: 'valid token',
-        //                 status: 403
-        //             });
-        //         }
-        //     })
-        // }
+                } else {
+                    
+                    resolve({
+                        message: 'valid token',
+                        status: 403
+                    });
+                }
+            })
+        }
     });
 
 };
